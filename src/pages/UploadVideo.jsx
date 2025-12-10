@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../api";
+import api from "../api/api.js";
 
 export default function UploadVideo() {
   const [title, setTitle] = useState("");

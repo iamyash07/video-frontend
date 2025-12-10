@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../api";
+import api from "../api/api.js";
 
 export default function PlaylistModal({ videoId, isOpen, onClose }) {
   const [playlists, setPlaylists] = useState([]);

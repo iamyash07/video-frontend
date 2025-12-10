@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../api";
+import api from "../api/api.js";
 import { useParams, Link } from "react-router-dom";
 
 export default function ChannelPage() {
