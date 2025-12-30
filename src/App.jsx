@@ -8,9 +8,6 @@ import VideoPlayer from "./pages/VideoPlayer";
 import MyVideos from "./pages/MyVideos";
 import ChannelPage from "./pages/ChannelPage";
 import WatchHistory from "./pages/WatchHistory";
-
-
-
 import Navbar from "./components/Navbar";
 
 export default function App() {
