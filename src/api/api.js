@@ -1,13 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
- baseURL: "http://localhost:5050/api/v1",
-   // FIXED
+  baseURL: "http://localhost:5050/api/v1",
   withCredentials: true,
 });
-
-// Debug log
-console.log("🔥 AXIOS INSTANCE LOADED WITH:", api.defaults.baseURL);
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
