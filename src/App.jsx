@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -10,38 +11,41 @@ import ChannelPage from "./pages/ChannelPage";
 import WatchHistory from "./pages/WatchHistory";
 import Navbar from "./components/Navbar";
 
+function TestConnection() {
+  const [status, setStatus] = useState("Connecting...");
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/healthcheck")
+      .then(res => res.json())
+      .then(d => { setStatus("CONNECTED"); setData(d); })
+      .catch(e => setStatus("FAILED: " + e.message));
+  }, []);
+
+  return (
+    <div style={{ padding: 50, textAlign: "center" }}>
+      <h1>{status}</h1>
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <div className="font-sans bg-gray-50 min-h-screen">
-      {/* GLOBAL NAVBAR */}
       <Navbar />
-
-      {/* PAGE CONTENT */}
       <div className="max-w-6xl mx-auto mt-6 px-4">
         <Routes>
-
-          {/* PUBLIC ROUTES */}
-          <Route path="/" element={<VideosList />} />
+           <Route path="/" element={<VideosList />} />
           <Route path="/video/:id" element={<VideoPlayer />} />
-
-          {/* AUTH ROUTES */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
-          {/* USER ROUTES */}
           <Route path="/upload" element={<UploadVideo />} />
           <Route path="/my-videos" element={<MyVideos />} />
-
-          {/* CHANNEL ROUTES */}
           <Route path="/users/c" element={<ChannelPage />} />
           <Route path="/users/c/:username" element={<ChannelPage />} />
-          
-          {/* whatch History Rooutes */}
           <Route path="/history" element={<WatchHistory />} />
-
-          {/* LOGOUT ROUTE */}
           <Route path="/logout" element={<Logout />} />
-
         </Routes>
       </div>
     </div>
